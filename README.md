@@ -21,7 +21,7 @@ A sleek, AI-powered note-taking and knowledge base application where you can cap
 
 ### 1. Clone & Install Dependencies
 ```bash
-git clone https://github.com/harshil7patel/AI-Second-Brain.git broski
+git clone https://github.com/harshil7patel/Broski.git broski
 cd broski
 npm install
 ```
