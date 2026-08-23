@@ -189,7 +189,7 @@ export default function SignupPage() {
                 <Brain className="w-7 h-7 text-brand-400" />
               </div>
               <div>
-                <h1 className="text-3xl font-bold gradient-text">AI Second Brain</h1>
+                <h1 className="text-3xl font-bold gradient-text">Broski</h1>
                 <p className="text-sm text-text-2">Powered by Ollama</p>
               </div>
             </div>
@@ -229,7 +229,7 @@ export default function SignupPage() {
               <Brain className="w-6 h-6 text-brand-400" />
             </div>
             <div>
-              <span className="text-2xl font-bold gradient-text">AI Second Brain</span>
+              <span className="text-2xl font-bold gradient-text">Broski</span>
               <p className="text-xs text-text-2">Powered by Ollama</p>
             </div>
           </motion.div>

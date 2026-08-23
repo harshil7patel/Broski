@@ -32,7 +32,7 @@ export default function Home() {
       >
         <Brain className="w-8 h-8 text-brand-400" />
       </motion.div>
-      <p className="text-text-2 text-sm animate-pulse font-medium">Loading your brain…</p>
+      <p className="text-text-2 text-sm animate-pulse font-medium">Loading Broski…</p>
     </div>
   )
 }

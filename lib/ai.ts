@@ -72,7 +72,7 @@ export async function askOllama(question: string, notes: Note[]): Promise<string
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
       model: OLLAMA_MODEL(),
-      prompt: `You are an intelligent, highly capable second brain assistant. 
+      prompt: `You are Broski, an intelligent, highly capable second brain assistant. 
 First, try to answer the user's question clearly and comprehensively using the notes provided below. 
 If the notes do not contain the answer, you should answer using your own extensive general knowledge, but kindly mention that you are answering from your general knowledge since it wasn't found in their notes.
 

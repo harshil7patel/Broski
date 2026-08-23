@@ -128,7 +128,7 @@ export default function Sidebar({
             <div className="w-8 h-8 rounded-xl bg-brand-400/10 border border-brand-400/15 flex items-center justify-center glow-brand">
               <Brain className="w-4 h-4 text-brand-400" />
             </div>
-            <span className="font-bold text-text-1 text-sm gradient-text">Second Brain</span>
+            <span className="font-bold text-text-1 text-sm gradient-text">Broski</span>
           </div>
           <button onClick={() => setCollapsed(true)} className="p-1.5 rounded-lg hover:bg-surface-700 text-text-3 transition-colors">
             <ChevronLeft className="w-4 h-4" />

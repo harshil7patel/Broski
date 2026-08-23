@@ -1,150 +1,131 @@
-# 🧠 AI Second Brain
+# 🧠 Broski — AI Second Brain & Knowledge Base
 
-A premium AI-powered note-taking app where you store notes and ask AI questions from your own knowledge base.
+A sleek, AI-powered note-taking and knowledge base application where you can capture thoughts, organize notes with tags, upload PDFs, generate exam-style summaries (2-mark, 5-mark, 10-mark), and ask AI questions directly from your own personal knowledge base.
 
 ---
 
-## ⚡ Quick Start (3 steps)
+## 🚀 Features
 
-### Step 1 — Install dependencies
+- 📝 **Rich Note Editor**: Markdown support, auto-save (debounced), word count, and timestamps.
+- 💬 **Ask Broski (AI Assistant)**: Ask questions and get answers synthesized directly from your personal notes context.
+- ⚡ **Structured Summaries**: One-click generation of 2-mark (quick recap), 5-mark (concept overview), and 10-mark (comprehensive breakdown) exam summaries.
+- 📄 **PDF Text Extraction**: Upload PDF documents directly to convert them into searchable notes.
+- 🔐 **Authentication**: User registration and login powered by Supabase Auth with Row Level Security (RLS).
+- 🏷️ **Tagging & Organization**: Pin notes, search through titles and content, and organize with custom tags.
+- 📤 **Export Notes**: Export notes to Markdown (`.md`) or Plain Text (`.txt`) at any time.
+- 🎨 **Modern Dark Aesthetics**: Custom glassmorphism design, glowing accents, fluid animations with Framer Motion, and responsive layout.
+
+---
+
+## ⚡ Quick Start
+
+### 1. Clone & Install Dependencies
 ```bash
+git clone https://github.com/harshil7patel/AI-Second-Brain.git broski
+cd broski
 npm install
 ```
 
-### Step 2 — Set up environment variables
-Copy `.env.local` and fill in your keys:
-```
-NEXT_PUBLIC_SUPABASE_URL=        ← from supabase.com project settings
-NEXT_PUBLIC_SUPABASE_ANON_KEY=   ← from supabase.com project settings
-ANTHROPIC_API_KEY=               ← from console.anthropic.com
+### 2. Configure Environment Variables
+Copy the `.env.example` file to create `.env.local`:
+```bash
+cp .env.example .env.local
 ```
 
-### Step 3 — Run
-```bash
-npm run dev
+Fill in your configuration keys in `.env.local`:
+```env
+# Supabase
+NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
+
+# Ollama / Local AI
+OLLAMA_BASE_URL=http://localhost:11434
+OLLAMA_MODEL=llama3
 ```
-Open http://localhost:3000
 
 ---
 
 ## 🗄️ Supabase Setup
 
-1. Go to https://supabase.com → create new project
-2. Go to **SQL Editor** → paste contents of `supabase-schema.sql` → Run
-3. Go to **Authentication** → enable **Email** provider
-4. Copy **Project URL** and **anon key** from Settings → API
+1. Create a project at [supabase.com](https://supabase.com).
+2. Go to the **SQL Editor** in your Supabase dashboard and run the schema script located in [`supabase-schema.sql`](supabase-schema.sql).
+3. Under **Authentication** &rarr; **Providers**, ensure the **Email** provider is enabled.
+4. Copy your **Project URL** and **anon key** from **Project Settings** &rarr; **API**, and add them to `.env.local`.
 
 ---
 
-## 🤖 AI Setup
+## 🤖 AI Setup (Ollama)
 
-### Option A — Anthropic Claude API (recommended)
-1. Go to https://console.anthropic.com
-2. Create API key
-3. Add to `.env.local` as `ANTHROPIC_API_KEY`
+Broski uses **Ollama** for local, private AI inference with no external API charges:
 
-### Option B — Local Ollama (free, no API key)
-1. Install Ollama: https://ollama.ai
-2. Run: `ollama pull llama3`
-3. In `.env.local` set: `OLLAMA_BASE_URL=http://localhost:11434`
-4. In `lib/ai.ts` change the function calls to use `askOllama()` instead
+1. Download and install [Ollama](https://ollama.ai).
+2. Pull the default model:
+   ```bash
+   ollama pull llama3
+   ```
+3. Start the Ollama service:
+   ```bash
+   ollama serve
+   ```
+4. Verify your `OLLAMA_BASE_URL` in `.env.local` points to `http://localhost:11434`.
+
+---
+
+## 🛠️ Development & Build
+
+Run the local development server:
+```bash
+npm run dev
+```
+Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+To create a production build:
+```bash
+npm run build
+npm run start
+```
 
 ---
 
 ## 📁 Project Structure
 
 ```
-ai-second-brain/
+broski/
 ├── app/
 │   ├── (auth)/
-│   │   ├── login/page.tsx       ← Login page
-│   │   └── signup/page.tsx      ← Signup page
+│   │   ├── login/page.tsx         # Login page
+│   │   └── signup/page.tsx        # Signup page
 │   ├── api/
-│   │   ├── notes/               ← CRUD API routes
-│   │   │   ├── route.ts         ← GET all, POST create
-│   │   │   └── [id]/route.ts    ← GET, PATCH, DELETE by id
-│   │   └── ai/
-│   │       ├── summarize/route.ts ← AI summary endpoint
-│   │       └── ask/route.ts       ← AI Q&A endpoint
-│   ├── dashboard/page.tsx       ← Main dashboard
-│   ├── notes/[id]/page.tsx      ← Note editor page
-│   └── layout.tsx               ← Root layout
-│
+│   │   ├── ai/
+│   │   │   ├── ask/route.ts       # AI Q&A route
+│   │   │   └── summarize/route.ts # AI summary route
+│   │   ├── auth/                  # Auth endpoints
+│   │   └── notes/                 # Note CRUD & upload endpoints
+│   ├── dashboard/page.tsx         # Main dashboard
+│   ├── notes/[id]/page.tsx        # Note editor page
+│   └── layout.tsx                 # Root layout & global metadata
 ├── components/
+│   ├── ai/
+│   │   ├── AskAI.tsx              # AI Q&A assistant interface
+│   │   └── SummaryPanel.tsx       # 2/5/10-mark summary generator
 │   ├── layout/
-│   │   └── Sidebar.tsx          ← Navigation sidebar
-│   ├── notes/
-│   │   └── NoteEditor.tsx       ← Rich note editor with auto-save
-│   └── ai/
-│       ├── AskAI.tsx            ← Chat interface for Q&A
-│       └── SummaryPanel.tsx     ← 2/5/10-mark summary panel
-│
-├── hooks/
-│   └── useNotes.ts              ← Notes CRUD hook
-│
+│   │   └── Sidebar.tsx            # Navigation sidebar
+│   └── notes/
+│       ├── ExportNote.tsx         # Note export modal
+│       ├── NoteEditor.tsx         # Markdown note editor
+│       └── PdfUpload.tsx          # PDF upload handler
 ├── lib/
-│   ├── ai.ts                    ← Anthropic + Ollama integration
-│   ├── utils.ts                 ← Helper functions
-│   └── supabase/
-│       ├── client.ts            ← Browser Supabase client
-│       ├── server.ts            ← Server Supabase client
-│       └── middleware.ts        ← Auth redirect middleware
-│
-├── types/index.ts               ← TypeScript interfaces
-├── styles/globals.css           ← Global styles + CSS variables
-├── middleware.ts                ← Route protection
-├── supabase-schema.sql          ← Database schema (run once)
-└── .env.local                   ← Your secret keys (never commit!)
+│   ├── ai.ts                      # Ollama AI integration & prompt orchestration
+│   ├── supabase/                  # Browser & server Supabase clients
+│   └── utils.ts                   # Formatting & utility functions
+├── supabase-schema.sql            # Database schema & RLS policies
+├── .env.example                   # Template environment variables
+└── README.md
 ```
 
 ---
 
-## 🚀 Deploy to Vercel
+## 🔒 Security & Privacy Notes
 
-```bash
-npm install -g vercel
-vercel
-```
-
-Add environment variables in Vercel dashboard → Settings → Environment Variables.
-
----
-
-## ✨ Features
-
-- ✅ Email auth (login / signup)
-- ✅ Create, edit, delete, pin notes
-- ✅ Auto-save (1.5s debounce)  
-- ✅ Tags system
-- ✅ Search notes
-- ✅ AI Q&A from your notes only
-- ✅ 2-mark / 5-mark / 10-mark summaries
-- ✅ Dark theme, premium UI
-- ✅ Collapsible sidebar
-- ✅ Word count, timestamps
-- ✅ Responsive layout
-- ✅ Beautiful glassmorphism UI
-
----
-
-## 📦 All Dependencies Installed
-
-| Package | Purpose |
-|---------|---------|
-| `next` | Framework |
-| `react`, `react-dom` | UI library |
-| `framer-motion` | Animations |
-| `lucide-react` | Icons |
-| `@supabase/supabase-js` | Database + Auth |
-| `@supabase/ssr` | SSR auth helpers |
-| `@anthropic-ai/sdk` | Claude AI |
-| `react-hot-toast` | Notifications |
-| `react-markdown` + `remark-gfm` | Markdown rendering |
-| `react-textarea-autosize` | Auto-growing textarea |
-| `zustand` | State management (ready to use) |
-| `date-fns` | Date formatting |
-| `uuid` | ID generation |
-| `clsx` + `tailwind-merge` | Class utilities |
-| `pdf-parse` | PDF text extraction (advanced) |
-| `tailwindcss` | CSS framework |
-| `typescript` | Type safety |
+- Notes are protected using Supabase **Row Level Security (RLS)** — users can only access their own notes.
+- Keep all `.env.local` files secret and never commit private keys (such as `service_role` keys) to public repositories.

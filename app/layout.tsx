@@ -7,8 +7,8 @@ const inter = Inter({ variable: "--font-geist-sans", subsets: ["latin"] })
 const jetbrains = JetBrains_Mono({ variable: "--font-geist-mono", subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "AI Second Brain — Your Intelligent Knowledge Base",
-  description: "Store notes, ask AI questions, and generate summaries powered by your personal knowledge.",
+  title: "Broski — Your Intelligent AI Second Brain",
+  description: "Store notes, ask AI questions, and generate summaries powered by your personal knowledge base.",
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

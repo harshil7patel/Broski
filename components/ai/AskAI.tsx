@@ -67,7 +67,7 @@ export default function AskAI() {
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <h2 className="text-base font-bold text-text-1">Ask your Second Brain</h2>
+              <h2 className="text-base font-bold text-text-1">Ask Broski</h2>
               <span className="px-2 py-0.5 rounded-md bg-accent-500/12 text-accent-400 text-[10px] font-bold uppercase tracking-wider border border-accent-400/10">
                 Ollama
               </span>

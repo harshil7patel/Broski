@@ -25,7 +25,7 @@ export default function ExportNote({ note, onClose }: ExportNoteProps) {
       if (note.tags?.length) md += `**Tags:** ${note.tags.join(", ")}\n\n`
       md += `---\n\n`
       md += note.content
-      md += `\n\n---\n*Exported from AI Second Brain on ${new Date().toLocaleDateString()}*\n`
+      md += `\n\n---\n*Exported from Broski on ${new Date().toLocaleDateString()}*\n`
       return md
     }
     let txt = `${note.title}\n${"=".repeat(note.title.length)}\n\n`
